@@ -12,3 +12,10 @@ CREATE TABLE employees(
     manager_id INT NULL,
     PRIMARY KEY(id)
 );
+
+CREATE TABLE department(
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(60) NULL,
+    PRIMARY KEY(id)
+);
+
