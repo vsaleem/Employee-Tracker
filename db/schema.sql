@@ -19,3 +19,11 @@ CREATE TABLE department(
     PRIMARY KEY(id)
 );
 
+CREATE TABLE employee_role(
+    id INT NOT NOLL AUTO_INCREMENT,
+    title VARCHAR(30),
+    salary VARCHAR(10),
+    department_id INT,
+    PRIMARY KEY(id)
+);
+
