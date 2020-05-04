@@ -58,9 +58,10 @@ function userPrompt(){
 // CREATE FUNCTIONS TO PULL INFO FROM TABLES IN DB
 
 function viewEmployees(){
-    let query = SELECT employees.first_name, employees.last_name, employee_role.title, employee_role.salary, department_name FROM connection.query(query, function (error, response){
+        let query = "SELECT employees.first_name, employees.last_name, employee_role.title, employee_role.salary, department.name  FROM employees LEFT JOIN employee_role ON employee_role.id = employees.role_id LEFT JOIN department ON employee_role.department_id = department.id";
+        connection.query(query, function (error, response){
         if (error) throw error;
-        console.table(res);
+        console.table(response);
         console.log('Request complete.');
         go();
     });      
