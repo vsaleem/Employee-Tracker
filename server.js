@@ -75,7 +75,15 @@ function viewRoles(){
         go();
     });
 };
-
+function viewDepartment(){
+    let query = "SELECT * FROM department"
+    connection.query(query, function(error, respose){
+        if(error) throw error;
+        console.table(response);
+        console.log('Request complete.');
+        go();
+    });
+};
 
 
 module.exports = {
