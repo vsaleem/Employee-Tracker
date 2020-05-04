@@ -61,10 +61,21 @@ function viewEmployees(){
     let query = SELECT employees.first_name, employees.last_name, employee_role.title, employee_role.salary, department_name FROM connection.query(query, function (error, response){
         if (error) throw error;
         console.table(res);
-        console.log('Request completed.');
+        console.log('Request complete.');
         go();
     });      
 };
+function viewRoles(){
+    let query = "SELECT * FROM employee_role"
+    connection.query(query, function (error, response){
+        if(error) throw error;
+        console.table(response);
+        console.log("Request complete.")
+        go();
+    });
+};
+
+
 
 module.exports = {
     go: go()
