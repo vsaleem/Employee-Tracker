@@ -55,3 +55,17 @@ function userPrompt(){
         };
     });
 };
+// CREATE FUNCTIONS TO PULL INFO FROM TABLES IN DB
+
+function viewEmployees(){
+    let query = SELECT employees.first_name, employees.last_name, employee_role.title, employee_role.salary, department_name FROM connection.query(query, function (error, response){
+        if (error) throw error;
+        console.table(res);
+        console.log('Request completed.');
+        go();
+    });      
+};
+
+module.exports = {
+    go: go()
+}
