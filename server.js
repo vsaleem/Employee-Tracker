@@ -103,5 +103,21 @@ function addEmployee(){
         });
         console.log(response);
         console.log(roles);
-    });
+    
+        // PROMPT TO GET NEW EMPLOYEE INFO
+        inquirer.prompt([
+            {
+            type: "list",
+            name: "role_id",
+            message: "Select Role",
+            choices: roles
+        },  {
+            // type: "list",
+            // name: "role_id",
+            // message: "Select Role",
+            // choices: roles
+        },
+    ])
+});
+    
 };
