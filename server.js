@@ -2,6 +2,13 @@ const connection = require('./db/db');
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 
+connection.connect(function(error){
+    if (error) throw error;
+    console.log('Result: ' + 'connected!');
+    userPrompt();
+});
+
+
 function userPrompt(){
     inquirer.prompt({
         name: 'choice',
@@ -63,7 +70,7 @@ function viewEmployees(){
         if (error) throw error;
         console.table(response);
         console.log('Request complete.');
-        go();
+        userPrompt();
     });      
 };
 function viewRoles(){
@@ -72,20 +79,29 @@ function viewRoles(){
         if(error) throw error;
         console.table(response);
         console.log("Request complete.")
-        go();
+        userPrompt();
     });
 };
 function viewDepartment(){
     let query = "SELECT * FROM department"
-    connection.query(query, function(error, respose){
+    connection.query(query, function(error, response){
         if(error) throw error;
         console.table(response);
         console.log('Request complete.');
-        go();
+        userPrompt();
     });
 };
 
-
-module.exports = {
-    go: go()
-}
+// CREATE FUNCTIONS THAT ADDS TO TABLE IN DB
+function addEmployee(){
+    console.log('Adding Employees')
+    let query = 'SELECT * FROM employee_role'
+    connection.query(query, function (error, response){
+        if(error) throw error;
+        const roles = response.map(function(item){
+            return item.title;
+        });
+        console.log(response);
+        console.log(roles);
+    });
+};
