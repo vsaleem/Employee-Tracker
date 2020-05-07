@@ -20,7 +20,7 @@ CREATE TABLE department(
 );
 
 CREATE TABLE employee_role(
-    id INT NOT NOLL AUTO_INCREMENT,
+    id INT NOT NULL AUTO_INCREMENT,
     title VARCHAR(30),
     salary VARCHAR(10),
     department_id INT,
