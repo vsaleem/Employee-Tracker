@@ -62,14 +62,14 @@ function userPrompt(){
         };
     });
 };
-// CREATE FUNCTIONS TO PULL INFO FROM TABLES IN DB
+// FUNCTIONS TO VIEW INFO FROM DB
 
 function viewEmployees(){
         let query = "SELECT employees.first_name, employees.last_name, employee_role.title, employee_role.salary, department.name  FROM employees LEFT JOIN employee_role ON employee_role.id = employees.role_id LEFT JOIN department ON employee_role.department_id = department.id";
         connection.query(query, function (error, response){
         if (error) throw error;
         console.table(response);
-        console.log('Request complete.');
+        console.log('Request complete.\n');
         userPrompt();
     });      
 };
@@ -94,7 +94,7 @@ function viewDepartment(){
 
 // CREATE FUNCTIONS THAT ADDS TO TABLE IN DB
 function addEmployee(){
-    console.log('Adding Employees')
+    console.log('\nPlease enter the new Employee`s information.\n')
     let query = 'SELECT * FROM employee_role'
     connection.query(query, function (error, response){
         if(error) throw error;
@@ -121,14 +121,21 @@ function addEmployee(){
             message: "Enter Last Name"
         },
     ]).then(function(enter){
-        let query = "INSERT INTO employees(first_name, last_name, role_id) VALUES (?, ?, ?)";
-        connection.query(query [enter.first_name, enter.last_name, enter.role_id], 
-            function(error, response){
+        
+        connection.query("INSERT INTO employees SET ?", {
+            first_name: enter.first_name,
+            last_name: enter.last_name,
+            
+        },
+         function(error, response){
                 if (error) throw error;
-                console.log(response);
-                console.log("Employee has been added.");
-                userPrompt();
-            });
+                // console.log(enter);
+                console.log("\nEmployee has been added.\n");
+                console.table(enter);
+
+            }
+        )
+            
     })
 });
     
