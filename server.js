@@ -101,8 +101,8 @@ function addEmployee(){
         const roles = response.map(function(item){
             return item.title;
         });
-        console.log(response);
-        console.log(roles);
+        // console.log(response);
+        // console.log(roles);
     
         // PROMPT TO GET NEW EMPLOYEE INFO
         inquirer.prompt([
@@ -112,12 +112,24 @@ function addEmployee(){
             message: "Select Role",
             choices: roles
         },  {
-            // type: "list",
-            // name: "role_id",
-            // message: "Select Role",
-            // choices: roles
+            type: "input",
+            name: "first_name",
+            message: "Enter First Name",
+        },  {
+            type: "input",
+            name: "last_name",
+            message: "Enter Last Name"
         },
-    ])
+    ]).then(function(enter){
+        let query = "INSERT INTO employees(first_name, last_name, role_id) VALUES (?, ?, ?)";
+        connection.query(query [enter.first_name, enter.last_name, enter.role_id], 
+            function(error, response){
+                if (error) throw error;
+                console.log(response);
+                console.log("Employee has been added.");
+                userPrompt();
+            });
+    })
 });
     
 };
