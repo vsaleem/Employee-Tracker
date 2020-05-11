@@ -4,7 +4,7 @@ const cTable = require('console.table');
 
 connection.connect(function(error){
     if (error) throw error;
-    console.log('Result: ' + 'connected!');
+    console.log('Result: ' + 'connected!\n\n');
     userPrompt();
 });
 
@@ -65,7 +65,7 @@ function userPrompt(){
 // FUNCTIONS TO VIEW INFO FROM DB
 
 function viewEmployees(){
-        let query = "SELECT employees.first_name, employees.last_name, employee_role.title, employee_role.salary, department.name  FROM employees LEFT JOIN employee_role ON employee_role.id = employees.role_id LEFT JOIN department ON employee_role.department_id = department.id";
+        let query = "SELECT employees.first_name, employees.last_name, employee_role.title, employee_role.salary, department.department  FROM employees LEFT JOIN employee_role ON employee_role.id = employees.role_id LEFT JOIN department ON employee_role.department_id = department.id";
         connection.query(query, function (error, response){
         if (error) throw error;
         console.table(response);
@@ -92,7 +92,7 @@ function viewDepartment(){
     });
 };
 
-// CREATE FUNCTIONS THAT ADDS TO TABLE IN DB
+// FUNCTION THAT ADDS NEW EMPLOYEE TO TABLE IN DB
 function addEmployee(){
     console.log('\nPlease enter the new Employee`s information.\n')
     let query = 'SELECT * FROM employee_role'
@@ -132,6 +132,7 @@ function addEmployee(){
                 // console.log(enter);
                 console.log("\nEmployee has been added.\n");
                 console.table(enter);
+                userPrompt();
 
             }
         )
@@ -139,4 +140,19 @@ function addEmployee(){
     })
 });
     
+};
+
+function addRole(){
+    console.log('\n Create new role.\n')
+    let query = "SELECT * FROM department"
+    connection.query(query, function (error, response){
+        if(error)throw error;
+        const departments = response.map(function(item){
+            return item.department;
+        });
+        // console.log(departments)
+    });
+
+
+   
 };
