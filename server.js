@@ -151,21 +151,26 @@ function addRole(){
             return item.department;
         });
         // console.log(departments)
-    });
 
     // PROMPT TO GET NEW ROLE INFO
     inquirer.prompt([
+        {
+            type: "list",
+            name: "department",
+            message: "Select Department.",
+            choices: departments
+        },
         {
             type: "input",
             name: "title",
             message: "Enter new role title."
 
         },
-        {
-            type: "input",
-            name: "department_id",
-            message: "Enter Role Id."
-        },
+        // {
+        //     type: "input",
+        //     name: "department_id",
+        //     message: "Enter Role Id."
+        // },
         {
             type: "input",
             name: "salary",
@@ -182,8 +187,9 @@ function addRole(){
             if(error) throw error;
             // console.log(enter);
             console.log("\nNew Role has been added.\n");
-            console.log(enter);
+            console.table(enter);
             userPrompt();
         });
     });
+});
 };
