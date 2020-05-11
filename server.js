@@ -17,7 +17,7 @@ function userPrompt(){
         choices: [
             'View Employees',
             'View Roles',
-            'View Department',
+            'View Departments',
             'Add Employee',
             'Add Role',
             'Add Department',
@@ -36,7 +36,7 @@ function userPrompt(){
                 viewRoles();
                 break;
 
-            case "View Department":
+            case "View Departments":
                 viewDepartment();
                 break;
 
@@ -142,6 +142,7 @@ function addEmployee(){
     
 };
 
+// FUNCTION TO ADD NEW ROLE TO DB.
 function addRole(){
     console.log('\n Create new role.\n')
     let query = "SELECT * FROM department"
@@ -192,4 +193,33 @@ function addRole(){
         });
     });
 });
+};
+
+// FUNCTION TO ADD NEW DEPARTMENT TO DB.
+function addDepartment(){
+    console.log('\n Create new department.\n')
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "department",
+            message: "What is the new department name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "Enter Department I.D. Number."
+        },
+    ]).then(function(enter){
+        connection.query("INSERT INTO department SET ?", {
+            department: enter.department,
+            id: enter.id
+        },
+        function(error, response){
+            if(error) throw error;
+            console.log("\n New Department has been added.\n");
+            console.table(enter);
+            userPrompt();
+        });
+    });
+
 };
