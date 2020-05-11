@@ -3,7 +3,7 @@
 
 ## DESCRIPTION
 
-Created a mock management system that adds and updates employees and department information. Node.js, Inquirer, and MySQL were primary used to construst this system.
+Created a mock management system that adds and updates employees and department information. Node.js, Inquirer, and MySQL were primary used to construct this system.
 
 
 ## TABLE OF CONTENTS
