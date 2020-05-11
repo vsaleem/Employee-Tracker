@@ -135,9 +135,9 @@ function addEmployee(){
                 userPrompt();
 
             }
-        )
+        );
             
-    })
+    });
 });
     
 };
@@ -153,6 +153,37 @@ function addRole(){
         // console.log(departments)
     });
 
+    // PROMPT TO GET NEW ROLE INFO
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "title",
+            message: "Enter new role title."
 
-   
+        },
+        {
+            type: "input",
+            name: "department_id",
+            message: "Enter Role Id."
+        },
+        {
+            type: "input",
+            name: "salary",
+            message: "Enter starting salary."
+        }
+    ]).then(function(enter){
+        connection.query("INSERT INTO employee_role SET ?", {
+            department_id: enter.department_id,
+            title: enter.title,
+            salary: enter.salary
+
+        },
+        function(error, response){
+            if(error) throw error;
+            // console.log(enter);
+            console.log("\nNew Role has been added.\n");
+            console.log(enter);
+            userPrompt();
+        });
+    });
 };
