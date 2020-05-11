@@ -221,5 +221,28 @@ function addDepartment(){
             userPrompt();
         });
     });
-
 };
+
+// FUNCTION TO UPDATE EMPLOYEE INFORMATION.
+function updateRole(){
+    console.log('\nSelect employee to update.')
+    let allEmployees = 'SELECT * FROM employees'
+    connection.query(allEmployees, function (error, response){
+        if(error) throw error;
+        const employees = response.map(function(item){
+            return `${item.id} ${item.first_name} ${item.last_name}`
+        })
+        console.log(employees);
+        // let employeeArray = [];
+        // employeeArray.push(employees);
+
+        inquirer.prompt([
+            {
+                type: "list",
+                name: "employees",
+                message: "Select Employee.",
+                choices: employees
+            },
+        ])
+    })
+}
